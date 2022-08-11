@@ -4,7 +4,8 @@ import App from './App.vue'
 
 import './assets/scss/main.scss' // подключаем стили и пешем npm install sass-loader node-sass --save-dev
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false,
+Vue.config.devtools = false
 
 new Vue({
   render: h => h(App),
