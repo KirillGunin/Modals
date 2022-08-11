@@ -3,13 +3,13 @@
   <transition name="modal">
     <!-- закрытие по клику на область -->
     <div class="modal__wrapper" @click="$emit('close')">
-      <div class="modal-content">
+      <div class="modal-content" @click.stop="">
 
         <!-- header -->
         <div class="modal-header">
           <span class="modal-title"> {{ title }} </span>
           <!-- кнопка закрытия с эмитом -->
-          <span class="button-close" @close="$emit('close')">×</span>
+          <span class="button-close" @click="$emit('close')">×</span>
         </div>
 
         <!-- body -->
@@ -28,12 +28,12 @@ export default {
     title: {
       type: String,
       required: true
-    }
+    },
   },
   // закрытие по клавишам
   mounted() { // будет следить за клавишами
     document.body.addEventListener('keyup', event => {
-      if(event.keyCode === 27) this.$emit('close') // 27 - это кнопка esc
+      if(event.key === 'Escape') this.$emit('close')
     })
   },
   computed: {},
@@ -95,7 +95,5 @@ export default {
 .modal-body {
   text-align: center;
 }
-
-
 
 </style>

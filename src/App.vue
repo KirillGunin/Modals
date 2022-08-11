@@ -8,17 +8,21 @@
           <!-- first modal -->
           <button class="btn btnPrimary" @click="modalFirst = !modalFirst">Первое окно</button>
           <!-- по close меняется состояние -->
-          <modals title="Первое окно" v-show="modalFirst" @close="modalFirst = false">         
+          <modals
+          title="Первое окно"
+          v-show="modalFirst"
+          @close="modalFirst = false">    
+               
             <div slot="body">
               <p>Text</p>
-              <button class="btn btnPrimary" @close="modalFirst = !modalFirst">Закрыть</button>
+              <button class="btn btnPrimary" @click="modalFirst = !modalFirst">Закрыть</button>
             </div>
           </modals> 
 
           <!-- second modal -->
-          <button class="btn btnPrimary" @click="modalSecond.show = !modalSecond.show">Второе окно с формой</button>
+          <button class="btn btnPrimary" @click="modalSecond.show = !modalSecond.show">Окно с формой</button>
           <!-- по close меняется состояние -->
-          <modals title="Второе окно с формой" v-show="modalSecond.show" @click="modalSecond.show = false">
+          <modals title="Второе окно с формой" v-show="modalSecond.show" @close="modalSecond.show = false">
             <div slot="body">
               <form @submit.prevent="submitSecondForm">
                 <label>Имя:</label>
@@ -30,6 +34,10 @@
             </div>
           </modals> 
 
+          <!-- third modal -->
+          <button class="btn btnPrimary" @click="modalValidate = !modalValidate">Форма с валидацией</button>
+          <modalValidate v-show="modalValidate" @close=" modalValidate = false"/>
+
         </div>
       </section>
 
@@ -38,9 +46,10 @@
 </template>
 
 <script>
-import modals from '@/components/Modal.vue'
+import modals from '@/components/UI/Modal.vue'
+import modalValidate from '@/components/ModalValidate.vue'
 export default {
-  components: { modals },
+  components: { modals, modalValidate },
   data() {
     return{
       modalFirst: false, // состояние
@@ -48,7 +57,8 @@ export default {
         show: false,
         name: '',
         email: ''
-      }
+      },
+      modalValidate: false
     }
   },
   methods: {
